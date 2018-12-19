@@ -39,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView LastName;
     private TextView email;
     private TextView gender;
+    private TextView birthday;
+    private TextView friends;
+    private String Accesstoken;
+
 
 
 
@@ -54,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
         LastName = findViewById(R.id.txtLastName);
         email = findViewById(R.id.txtEmail);
         gender = findViewById(R.id.txtGender);
+        friends = findViewById(R.id.txtFriends);
+        birthday = findViewById(R.id.txtBirthday);
+
+
 
 
 
@@ -64,11 +72,14 @@ public class MainActivity extends AppCompatActivity {
 
         mCallbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = findViewById(R.id.login_button);
+       // loginButton.setReadPermissions("email", "public_profile","user_birthday","user_friends");
         loginButton.setReadPermissions("email", "public_profile");
+
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
+                Accesstoken = loginResult.getAccessToken().getToken();
                 GraphRequest request = GraphRequest.newMeRequest(
                         loginResult.getAccessToken(),
                         new GraphRequest.GraphJSONObjectCallback() {
@@ -82,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                 Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,first_name,last_name,email,gender");
+                parameters.putString("fields", "id,first_name,last_name,email,gender,birthday,friends");
                 request.setParameters(parameters);
                 request.executeAsync();
 
@@ -103,7 +114,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
+        if(AccessToken.getCurrentAccessToken() != null){
+            email.setText(AccessToken.getCurrentAccessToken().getUserId());
+        }
     }
 
     @Override
@@ -127,7 +140,6 @@ public class MainActivity extends AppCompatActivity {
                 profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?type=large");
                 Log.i("profile_pic", profile_pic + "");
                 bundle.putString("profile_pic", profile_pic.toString());
-                Toast.makeText(MainActivity.this,bundle.getString("profile_pic"),Toast.LENGTH_LONG).show();
                 Picasso.with(this).load(profile_pic.toString()).into(avatar);
 
 
@@ -148,10 +160,13 @@ public class MainActivity extends AppCompatActivity {
                 email.setText(object.getString("email"));
             if (object.has("gender"))
                 bundle.putString("gender", object.getString("gender"));
-                //gender.setText(object.getString("gender"));
+                gender.setText(object.getString("gender"));
             if (object.has("birthday"))
                 bundle.putString("birthday", object.getString("birthday"));
-                gender.setText(object.getString("birthday"));
+                birthday.setText(object.getString("birthday"));
+            if (object.has("friends"))
+                bundle.putString("friends", object.getJSONObject("friends").getJSONObject("summary").getString("total_count"));
+                friends.setText("Liczba znajomych "+ object.getJSONObject("friends").getJSONObject("summary").getString("total_count"));
 
 
 
