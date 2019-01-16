@@ -52,38 +52,46 @@
         android:textStyle="bold"
         android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:id="@+id/txtGender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FF335F"
-        android:textSize="15dp"
-        android:fontFamily="casual"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:id="@+id/txtBirthday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FF335F"
-        android:textSize="15dp"
-        android:fontFamily="casual"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:id="@+id/txtFriends"
+
+    <Button
+        android:id="@+id/buttonShareLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#FF335F"
+        android:background="@drawable/button_background"
+        android:layout_marginTop="10dp"
         android:textSize="15dp"
         android:fontFamily="casual"
-        android:gravity="center"
         android:textStyle="bold"
-        android:layout_gravity="center_horizontal" />
+        android:visibility="invisible"
+        android:text="Udostepnij link" />
+
+    <Button
+        android:id="@+id/buttonSharePhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:layout_marginTop="10dp"
+        android:textSize="15dp"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        android:text="Udostepnij zdjecie" />
+
+    <Button
+        android:id="@+id/buttonShareVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:layout_marginTop="10dp"
+        android:textSize="15dp"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        android:text="Udostepnij film" />
+
+
 
 
 
