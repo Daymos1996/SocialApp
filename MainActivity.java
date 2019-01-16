@@ -198,9 +198,7 @@ public class MainActivity extends AppCompatActivity {
             Uri mImageProfileUri = data.getData();
             try {
                 Bitmap image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImageProfileUri);
-
-                Toast.makeText(this, image+"dziala", Toast.LENGTH_SHORT).show();
-
+                
                 SharePhoto photo = new SharePhoto.Builder()
                         .setBitmap(image)
                         .build();
